@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="common/head :: head"></head>
+<body>
+
+	<div id="content">	
+		<nav lang="en" th:replace="common/patientheader :: header"></nav>
+		<div class="container my-3">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/patient}">Patient</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Add</li>
+			  </ol>
+			</nav>
+			<div class="container">
+			  <form th:action="@{/patient/save}" th:object="${patient}" method="post" class="need-validated">
+			  	<input type="hidden" th:field="*{id}">
+			    <div class="form-group">
+			      <label for="name"><b>Name:</b></label>
+			      <input type="text" class="form-control" id="name" placeholder="Enter Name with Initials" th:field="*{name}" required>
+			    </div>
+			    
+			     <div class="form-group">
+			      <label for="national_id"><b>NIC Number:</b></label>
+			      <input type="text" class="form-control" id="national_id" placeholder="Enter NIC Number" th:field="*{national_id}" required>
+			    </div>
+			    
+			     <div class="form-group">
+                  <label for="sex"><b>Sex:</b></label>
+                 <select class="form-control" th:field="*{sex}" required>
+                    <option value="">Select a Sex...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                   
+                
+                  </select>
+                </div>
+			    
+			    
+			    
+			    <div class="form-group">
+			      <label for="age"><b>Age:</b></label>
+			      <input type="text" class="form-control" id="age" placeholder="Enter Age" th:field="*{age}" required>
+			    </div>
+			    
+			    
+			    
+			  
+			   
+			    
+			 <div class="form-group">
+                  <label for="district"><b>District:</b></label>
+                 <select class="form-control" th:field="*{district}" required>
+                    <option value="">Select a Module...</option>
+                    <option value="Kurunagala">Kurunagala</option>
+                    <option value="Puttalam">Puttalam</option>
+                    <option value="Gampaha">Gampaha</option>
+                
+                  </select>
+                </div>
+			    
+			     <div class="form-group">
+                  <label for="vaccine_dose"><b>Vaccine Dose:</b></label>
+                 <select class="form-control" th:field="*{vaccine_dose}" required>
+                    <option value="">Select a Dose...</option>
+                    <option value="1st_dose">1st dose</option>
+                    <option value="2nd_dose">2nd dose</option>
+
+                  </select>
+                </div>
+                
+                   <div class="form-group">
+                  <label for="name_vaccine"><b>Name of the Vaccine:</b></label>
+                 <select class="form-control" th:field="*{name_vaccine}" required>
+                    <option value="">Select a Vaccine Name...</option>
+                    <option value="Sinopharm">Sinopharm</option>
+                    <option value="Pfizer">Pfizer–BioNTech</option>
+                    <option value="AstraZeneca">Oxford–AstraZeneca</option>
+
+                  </select>
+                </div>
+                
+		
+			     <div class="form-group">
+			      <label for="place_vaccine"><b>Place of the Vaccination:</b></label>
+			      <input type="text" class="form-control" id="place_vaccine" placeholder="Enter Place of the Vaccination" th:field="*{place_vaccine}" required>
+			    </div>
+
+
+			      <div class="form-group">
+			      <label for="vaccination_date"><b>Vaccination Date:</b></label>
+			      <input type="date" class="form-control" id="vaccination_date" placeholder="Enter Vaccination Date" th:field="*{vaccination_date}" required>
+			    </div>
+			    
+			    <div class="form-group">
+			      <label for="batch_number"><b>Batch Number:</b></label>
+			      <input type="text" class="form-control" id="batch_number" placeholder="Enter Batch Number" th:field="*{batch_number}" required>
+			    </div>
+			   
+			    
+			    
+			    
+			    <button type="submit" class="btn btn-primary"><b>Submit</b></button>
+			  </form>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$('#patientMenuItem').addClass('active');
+	</script>
+	<footer lang="en" th:replace="common/footer :: footer"></footer>
+
+</body>
+</html>

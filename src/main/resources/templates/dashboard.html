@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en" th:replace="common/head :: head"></head>
+<body>
+
+
+	<div id="content">	
+		<nav lang="en" th:replace="common/dashheader :: header"></nav>
+		<div class="container my-3">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+			  </ol>
+			</nav>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title"><B>PATIENTS</B></h5>
+							<p class="card-text">PATIENTS MANAGEMENT PORTAL</p>
+							<a th:href="@{/patient}"
+								class="btn btn-primary">Click to Dashboard</a>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title"><B>VACCINES</B></h5>
+							<p class="card-text">VACCINE STORE MANAGEMENT PORTAL</p>
+							<a th:href="@{/vaccine}"
+								class="btn btn-primary">Click to Dashboard</a>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+			
+
+	<script type="text/javascript">
+		$('#dashboardMenuItem').addClass('active');
+	</script>
+
+	<footer lang="en" th:replace="common/footer :: footer"></footer>
+	
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="common/head :: head"></head>
+<body>
+	
+	
+	<div id="content">	
+		<nav lang="en" th:replace="common/patientheader :: header"></nav>
+		<div class="container my-3">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="patient">Patient</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">List</li>
+			  </ol>
+			</nav>
+			
+			<form id="basicSearchForm" th:object="${search}" th:action="@{/patient}" th:method="post" class="form-inline">
+				<div class="col-md-12 row">
+					<div class="col-md-3 input-group position-relative mb-2 mr-0 search">
+						<label class="my-1 mr-2" for="name">Name: </label>
+				           <input th:field="*{name}" class="form-control" type="text" autocomplete="off" />
+				           <span class="form-clear d-none"><i class="fa fa-times"></i></span>
+					</div>
+					
+					<button id="btnSearch" type="submit"
+						class="btn btn-primary mb-2 ml-md-2 ml-auto">Search</button>
+				</div>
+			</form>
+			
+			
+			<div class="table-responsive">
+			    <table class="table table-bordered table-striped"  style="overflow-x: auto !important;">
+			        <thead>
+			            <tr>
+			                <th>#</th>
+			                <th>Name</th> 
+			                <th>NIC Number</th>
+			                <th>Sex</th>
+			                <th>Age</th>
+			                <th>District</th>
+			                <th>Vaccine Dose</th>
+			                <th>Name of Vaccine</th>
+			                <th>Place Of Vaccination</th>
+			                <th>Vaccination Date</th>
+			                
+			                <th>Actions</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			        	<th:block th:if="${page.content.size() > 0 }">
+							<tr th:each="patient ,rowNumber : ${page.content}">	
+				                <td th:text="${(page.number * page.size) + rowNumber.index + 1}"></td>
+				                <td th:text="${patient.name}"></td>
+				                <td th:text="${patient.national_id}"></td>
+				                <td th:text="${patient.sex}"></td>
+				                <td th:text="${patient.age}"></td>
+				                <td th:text="${patient.district}"></td>
+				                <td th:text="${patient.vaccine_dose}"></td>
+				                <td th:text="${patient.name_vaccine}"></td>
+				                <td th:text="${patient.place_vaccine}"></td>
+				                <td th:text="${#dates.format(patient.vaccination_date, 'dd-MMM-yyyy')}"></td>
+				                
+				                <td>
+				                    <button class="btn btn-sm btn-warning" 
+										th:href="@{'/patient/edit/' + ${patient.id}}" data-toggle="confirmation" data-singleton="true"> Edit</button>
+									<button class="btn btn-sm btn-danger" 
+										th:href="@{'/patient/delete/' + ${patient.id}}" data-toggle="confirmation" data-singleton="true"> Delete</button>
+				                </td>
+			            	</tr>
+			            </th:block>
+			            <th:block th:unless="${page.content.size() > 0 }">
+							<tr>
+								<td colspan="100%" class="alert alert-danger" style="text-align: center;">No Records Available</td>
+							</tr>
+						</th:block>
+			        </tbody>
+			    </table>
+			    <th:block lang="en" th:replace="common/pager :: common"> </th:block>
+			</div>
+		</div>   
+	</div>
+	<script type="text/javascript">
+		$('#patientMenuItem').addClass('active');
+	</script>
+	<footer lang="en" th:replace="common/footer :: footer"></footer>
+	<script th:src='@{/js/bootstrap-confirmation.min.js}'></script>
+	<script th:src="@{/js/confirmation-config.js}"></script>
+</body>
+</html>

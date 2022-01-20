@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>		
+
+<th:block th:fragment="common" th:if="${page != null && page.content != null && page.content.size() &gt; 0 }" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"> 
+	<div class="row">
+		<div class="col-sm-12 col-md-5">
+			<div class="text-gray-900" th:text="@{'Showing ' + ${(page.number * page.size) + 1} +' to ' + ${(page.number * page.size) + page.content.size() } + ' of ' + ${page.totalElements} + ' entries '}"></div>
+		</div>
+		<div class="col-sm-12 col-md-7">
+			<ul class="pagination  justify-content-end">
+		  		<li class="page-item" th:if="${page.hasPrevious()}">
+		  			<a class="page-link" th:href="@{'?page=' + ${page.number-1} + '&size=' + ${page.size}}">Previous</a>
+		  		</li>
+		  		<li class="page-item disabled" th:unless="${page.hasPrevious()}">
+		  			<a class="page-link">Previous</a>
+		  		</li>
+		
+		       	<th:block  th:each=" i : ${#numbers.sequence( 0 , (page.totalPages-1) >= 0 ? (page.totalPages-1) : 0)}">
+		          	<li class="page-item disabled active" th:if="${page.number == i}">
+		          		<a class="page-link" th:text="${i+1}"></a>
+		          	</li>
+		        	<li class="page-item" th:unless="${page.number == i}">
+		        		<a class="page-link" th:href="${urlBuilder.replaceQueryParam('page', i).replaceQueryParam('size', page.size).toUriString()}" th:text="${i+1}"></a>
+		        	</li>
+		       	</th:block>
+		       	
+		      	<li class="page-item" th:if="${page.hasNext()}">
+		      		<a class="page-link" th:href="@{'?page=' + ${page.number+1} + '&size=' +${page.size}}">Next</a>
+		      	</li>
+		      	<li class="page-item disabled" th:unless="${page.hasNext()}">
+		      		<a class="page-link">Next</a>
+		      	</li>
+		      	
+			</ul>
+		</div>    	
+   	</div>
+    <script type="text/javascript"  th:inline="javascript">
+		function getURLParameter(url, name) {
+		    return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
+		}
+
+		$(document).ready(function(){
+
+			$("ul.pagination li a").click(function(e){
+				var searchform = $("form[id*='searchForm' i]");
+				var isDisabled = $(this).parent(".disabled").length;
+
+				if(searchform.length && !isDisabled){
+
+					e.preventDefault();
+					var href = $(this).attr('href');
+					searchform.attr('action',href);
+					searchform.submit();
+				}			
+			});
+		}); 
+	</script>	
+</th:block>

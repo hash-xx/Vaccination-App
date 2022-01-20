@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head lang="en" th:replace="common/head :: head"></head>
+<body>
+
+	<div id="content">	
+		<nav lang="en" th:replace="common/vaccineheader :: header"></nav>
+		<div class="container my-3">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb">
+			    <li class="breadcrumb-item"><a th:href="@{/vaccine}">Vaccine</a></li>
+			    <li class="breadcrumb-item active" aria-current="page">Add</li>
+			  </ol>
+			</nav>
+			<div class="container">
+			  <form th:action="@{/vaccine/save}" th:object="${vaccine}" method="post" class="need-validated">
+			  	<input type="hidden" th:field="*{id}">
+			    <div class="form-group">
+			      <label for="name"><b>Name:</b></label>
+			      <input type="text" class="form-control" id="name" placeholder="Enter Name with Initials" th:field="*{name}" required>
+			    </div>
+			    
+			    <div class="form-group">
+			      <label for="quantity"><b>Quantity:</b></label>
+			      <input type="text" class="form-control" id="quantity" placeholder="Enter Quantity" th:field="*{quantity}" required>
+			    </div>
+			    
+			    <div class="form-group">
+			      <label for="prices"><b>Price Rs/- :</b></label>
+			      <input type="text" class="form-control" id="prices" placeholder="Enter Prices" th:field="*{prices}" required>
+			    </div>
+			    
+			     
+			   
+			    
+			    
+			    
+			    <button type="submit" class="btn btn-primary"><b>Submit</b></button>
+			  </form>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$('#vaccineMenuItem').addClass('active');
+	</script>
+	<footer lang="en" th:replace="common/footer :: footer"></footer>
+
+</body>
+</html>
